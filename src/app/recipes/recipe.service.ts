@@ -1,3 +1,4 @@
+import { Ingredient } from './../shared/ingredient';
 import { Injectable } from '@angular/core';
 
 import { Recipe } from './recipe';
@@ -6,7 +7,10 @@ import { Recipe } from './recipe';
 export class RecipeService {
 
   private recipes: Recipe[] = [
-    new Recipe('Schnitzel', 'Schnitzel', 'http://www.daringgourmet.com/wp-content/uploads/2014/03/Schnitzel-7_edited.jpg', []),
+    new Recipe('Schnitzel', 'Schnitzel', 'http://www.daringgourmet.com/wp-content/uploads/2014/03/Schnitzel-7_edited.jpg', [
+      new Ingredient('French Fries', 2),
+      new Ingredient('Pork Meat', 1)
+    ]),
     new Recipe('Summer Salad', 'Summer Salad', 'http://cdn.iowagirleats.com/wp-content/uploads/2013/05/Triple-Berry-Summer-Salad-03_mini.jpg', []),
     new Recipe('Ice Cream', 'Ice Cream', 'http://lunar.moonworks.pl/upload/images/ice-cream.jpg', []),
     new Recipe('Apple Pie', 'Apple Pie', 'http://ak.c.ooyala.com/8xanByNDE6hb53ycG6CyupljeIY9O_xa/promo295046062', []),
