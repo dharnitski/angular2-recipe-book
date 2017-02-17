@@ -1,6 +1,7 @@
 import { Ingredient } from './../shared/ingredient';
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
+import 'rxjs/Rx';
 
 import { Recipe } from './recipe';
 
@@ -41,15 +42,21 @@ export class RecipeService {
     this.recipes[this.recipes.indexOf(oldRecipe)] = newRecipe;
   }
 
-  storeData(){
+  storeData() {
     const body = JSON.stringify(this.recipes);
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
-    return this.http.post('https://recipebook-39155.firebaseio.com/recipes.json', body, {headers: headers});
+    return this.http.put('https://recipebook-39155.firebaseio.com/recipes.json', body, { headers: headers });
   }
 
-  fetchData(){
-
+  fetchData() {
+    return this.http.get('https://recipebook-39155.firebaseio.com/recipes.json')
+      .map((response: Response) => response.json())
+      .subscribe(
+      (data: Recipe[]) => {
+        this.recipes = data;
+      }
+      );
   }
 }
