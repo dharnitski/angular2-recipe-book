@@ -1,5 +1,6 @@
 import { Ingredient } from './../shared/ingredient';
 import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
 
 import { Recipe } from './recipe';
 
@@ -18,7 +19,7 @@ export class RecipeService {
     new Recipe('Chicken Wild Rice Soup', 'Chicken Wild Rice Soup', 'http://www.carriesexperimentalkitchen.com/wp-content/uploads/2011/11/Panera-Copycat-Chicken-wild-rice-soup-1-1024x685.jpg', [])
   ];
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   getRecipes() {
     return this.recipes;
@@ -40,4 +41,15 @@ export class RecipeService {
     this.recipes[this.recipes.indexOf(oldRecipe)] = newRecipe;
   }
 
+  storeData(){
+    const body = JSON.stringify(this.recipes);
+    const headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post('https://recipebook-39155.firebaseio.com/recipes.json', body, {headers: headers});
+  }
+
+  fetchData(){
+
+  }
 }
