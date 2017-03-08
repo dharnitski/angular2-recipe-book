@@ -3,4 +3,10 @@ node_js:
   - "7"
 script:
 - npm install
-- ng build  
+- ng build
+
+deploy:
+  provider: heroku
+  buildpack: heroku-buildpack-static
+
+  
